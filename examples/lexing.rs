@@ -20,7 +20,7 @@ pub enum Kind {
 fn main() -> std::io::Result<()> {
     let file = File::open("examples/file.txt")?;
     let chars = UnsafeDecoder::new(file.bytes());
-	let metrics = source_span::DEFAULT_METRICS;
+    let metrics = source_span::DEFAULT_METRICS;
 
     let mut tokens = Vec::new();
     let mut current = Token::default();
