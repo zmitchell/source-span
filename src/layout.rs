@@ -5,6 +5,7 @@ use std::iter::Extend;
 ///
 /// Keep track of the byte index of each line in a UTF8-encoded so it can be indexed by cursor
 /// position.
+#[derive(Debug)]
 pub struct Layout<M: Metrics> {
     /// Byte index of each line.
     lines: Vec<usize>,

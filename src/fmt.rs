@@ -132,7 +132,7 @@ pub type Color = ();
 /// If the `colors` feature is enabled, it is also possible to set a color to
 /// draw the lines. This will also make the highlights more bright (or bold),
 /// along with the line numbers.
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub enum Style {
     /// Red curvy underline.
     Error,
@@ -285,6 +285,7 @@ impl Style {
 /// 3 | | }
 ///   | |_^ this is a pair of braces
 /// ```
+#[derive(Debug)]
 pub struct Highlight {
     span: Span,
     label: Option<String>,
@@ -384,6 +385,7 @@ impl Highlight {
 ///
 /// Highlights spans can cover multiple lines and overlap.
 /// See the [`Highlight`] documentation for more informations.
+#[derive(Debug)]
 pub struct Formatter {
     highlights: Vec<Highlight>,
     margin_color: Color,
@@ -515,7 +517,7 @@ impl Formatter {
 }
 
 /// Highlight with some more information about how to draw the lines.
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 struct MappedHighlight<'a> {
     h: &'a Highlight,
     margin_nest_level: usize,
@@ -550,7 +552,7 @@ impl<'a> MappedHighlight<'a> {
 }
 
 /// Character with style information.
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub enum Char {
     Empty,
     Text(char),
@@ -617,6 +619,7 @@ impl From<char> for Char {
 }
 
 /// A 2D character map.
+#[derive(Debug)]
 struct CharMap {
     data: Vec<Char>,
     width: usize,
@@ -859,6 +862,7 @@ impl fmt::Display for CharMap {
 ///
 /// This is the result of the [`Formatter::render`] function.
 /// It implements [`Display`](`fmt::Display`) and can hence be printted with a simple `printf!`.
+#[derive(Debug)]
 pub struct Formatted(Vec<CharMap>);
 
 impl fmt::Display for Formatted {
@@ -872,6 +876,7 @@ impl fmt::Display for Formatted {
 }
 
 /// A set of important lines to render.
+#[derive(Debug)]
 pub enum ImportantLines {
     All,
     Lines(Vec<usize>, usize),
